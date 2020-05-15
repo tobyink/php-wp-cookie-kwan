@@ -1,11 +1,16 @@
 <?php
 
 /**
- * Plugin Name: Cookie Kwan
- * Description: Yet another cookie consent plugin. Suitable for a Bootstrap-4-based site that does not track users. (Settings are on the "Reading" page.)
- * Version: 1.0
- * Author: Toby Inkster
- * Author URI: http://toby.ink/
+ * Plugin Name:        Cookie Kwan
+ * Plugin URI:         https://github.com/tobyink/php-wp-cookie-kwan
+ * Description:        Yet another cookie consent plugin. Suitable for a Bootstrap-4-based site that does not track users. (Settings are on the "Reading" page.)
+ * Version:            1.0
+ * Requires at least:  5.3
+ * Requires PHP:       7.2
+ * Author:             Toby Inkster
+ * Author URI:         http://toby.ink/
+ * License:            GPLv2
+ * License URI:        https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 define( 'COOKIE_KWAN_NAME', 'gdpr_consent' );
