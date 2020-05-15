@@ -84,20 +84,20 @@ add_action( 'wp_enqueue_scripts', function () {
 
 add_shortcode( 'if_cookies', function ( $atts=array(), $content='' ) {
 	if ( cookie_consent_given() ) {
-		return do_shortcodes($content);
+		return do_shortcode($content);
 	}
 	if ( array_key_exists( 'else', $atts ) ) {
-		return do_shortcodes($atts['else']);
+		return do_shortcode($atts['else']);
 	}
 	return '';
 } );
 
 add_shortcode( 'if_no_cookies', function ( $atts=array(), $content='' ) {
 	if ( !cookie_consent_given() ) {
-		return do_shortcodes($content);
+		return do_shortcode($content);
 	}
 	if ( array_key_exists( 'else', $atts ) ) {
-		return do_shortcodes($atts['else']);
+		return do_shortcode($atts['else']);
 	}
 	return '';
 } );
