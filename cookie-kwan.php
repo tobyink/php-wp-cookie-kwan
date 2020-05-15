@@ -24,7 +24,11 @@ if ( ! function_exists('cookie_consent_given') ) {
 
 if ( ! cookie_consent_given() ) {
 	add_filter( 'login_message', function () {
-		return get_option( 'cookie_kwan_message' );
+		$message = get_option( 'cookie_kwan_message' );
+		if ( empty($message) ) {
+			$message = COOKIE_KWAN_DEFAULT_MESSAGE;
+		}
+		return $message;
 	} );
 }
 
