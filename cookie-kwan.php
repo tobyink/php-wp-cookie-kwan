@@ -14,12 +14,18 @@
  */
 
 define( 'COOKIE_KWAN_NAME', 'gdpr_consent' );
-define( 'COOKIE_KWAN_DEFAULT_MESSAGE', '<p>Certain features of this site require cookies. This includes the ability to track whether you clicked the "Accept Cookies" button.</p>' );
+define( 'COOKIE_KWAN_DEFAULT_MESSAGE', '<p class="message">Certain features of this site require cookies. This includes the ability to track whether you clicked the "Accept Cookies" button.</p>' );
 
 if ( ! function_exists('cookie_consent_given') ) {
 	function cookie_consent_given () {
 		return $_COOKIE[COOKIE_KWAN_NAME];
 	}
+}
+
+if ( ! cookie_consent_given() ) {
+	add_filter( 'login_message', function () {
+		return get_option( 'cookie_kwan_message' );
+	} );
 }
 
 add_action( 'admin_init', function () {
@@ -89,20 +95,20 @@ add_action( 'wp_enqueue_scripts', function () {
 
 add_shortcode( 'if_cookies', function ( $atts=array(), $content='' ) {
 	if ( cookie_consent_given() ) {
-		return do_shortcodes($content);
+		return do_shortcode($content);
 	}
 	if ( array_key_exists( 'else', $atts ) ) {
-		return do_shortcodes($atts['else']);
+		return do_shortcode($atts['else']);
 	}
 	return '';
 } );
 
 add_shortcode( 'if_no_cookies', function ( $atts=array(), $content='' ) {
 	if ( !cookie_consent_given() ) {
-		return do_shortcodes($content);
+		return do_shortcode($content);
 	}
 	if ( array_key_exists( 'else', $atts ) ) {
-		return do_shortcodes($atts['else']);
+		return do_shortcode($atts['else']);
 	}
 	return '';
 } );
