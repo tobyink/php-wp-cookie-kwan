@@ -9,12 +9,18 @@
  */
 
 define( 'COOKIE_KWAN_NAME', 'gdpr_consent' );
-define( 'COOKIE_KWAN_DEFAULT_MESSAGE', '<p>Certain features of this site require cookies. This includes the ability to track whether you clicked the "Accept Cookies" button.</p>' );
+define( 'COOKIE_KWAN_DEFAULT_MESSAGE', '<p class="message">Certain features of this site require cookies. This includes the ability to track whether you clicked the "Accept Cookies" button.</p>' );
 
 if ( ! function_exists('cookie_consent_given') ) {
 	function cookie_consent_given () {
 		return $_COOKIE[COOKIE_KWAN_NAME];
 	}
+}
+
+if ( ! cookie_consent_given() ) {
+	add_filter( 'login_message', function () {
+		return get_option( 'cookie_kwan_message' );
+	} );
 }
 
 add_action( 'admin_init', function () {
