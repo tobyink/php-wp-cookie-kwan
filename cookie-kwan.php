@@ -101,7 +101,7 @@ add_shortcode( 'if_cookies', function ( $atts=array(), $content='' ) {
 	if ( cookie_consent_given() ) {
 		return do_shortcode($content);
 	}
-	if ( array_key_exists( 'else', $atts ) ) {
+	if ( is_array($atts) && array_key_exists( 'else', $atts ) ) {
 		return do_shortcode($atts['else']);
 	}
 	return '';
@@ -111,7 +111,7 @@ add_shortcode( 'if_no_cookies', function ( $atts=array(), $content='' ) {
 	if ( !cookie_consent_given() ) {
 		return do_shortcode($content);
 	}
-	if ( array_key_exists( 'else', $atts ) ) {
+	if ( is_array($atts) && array_key_exists( 'else', $atts ) ) {
 		return do_shortcode($atts['else']);
 	}
 	return '';
