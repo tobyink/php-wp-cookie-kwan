@@ -81,6 +81,7 @@ add_action( 'wp_enqueue_scripts', function () {
 					'width'     : '500px',
 					'max-width' : '80%',
 					'min-width' : '280px',
+					'z-index'   : '1060',
 				});
 				$('#cookie_kwan_accept').click(function () {
 					Cookies.set(COOKIE_KWAN_NAME, 1, { expires: 365 });
@@ -108,7 +109,7 @@ add_shortcode( 'if_cookies', function ( $atts=array(), $content='' ) {
 } );
 
 add_shortcode( 'if_no_cookies', function ( $atts=array(), $content='' ) {
-	if ( !cookie_consent_given() ) {
+	if ( ! cookie_consent_given() ) {
 		return do_shortcode($content);
 	}
 	if ( is_array($atts) && array_key_exists( 'else', $atts ) ) {
@@ -117,3 +118,9 @@ add_shortcode( 'if_no_cookies', function ( $atts=array(), $content='' ) {
 	return '';
 } );
 
+add_filter( 'comment_form_default_fields', function ( $fields ) {
+	if ( ! cookie_consent_given() ) {
+		unset( $fields['cookies'] );
+	}
+	return $fields;
+} );
